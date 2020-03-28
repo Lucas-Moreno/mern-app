@@ -5,6 +5,6 @@ mongoose.connect('mongodb+srv://lucas:lucas@cluster0-bqizz.mongodb.net/test?retr
         if (!err)
             console.log('MongoDB connected')
         else
-            console.log('Error while connecting MongoDB : ' . JSON.stringify(err, undefined, 2))
+            console.log('Error while connecting MongoDB : ' + JSON.stringify(err, undefined, 2))
     }
 )
