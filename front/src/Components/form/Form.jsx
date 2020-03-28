@@ -3,6 +3,7 @@ import React from 'react'
 const Form = () => {
     return (
         <div>
+            <h1>Créer un produit :</h1>
             <form id="form" name="form" method="post" action="">
                 <div>
                     <p>Produit :</p>
@@ -17,7 +18,7 @@ const Form = () => {
                     <textarea  rows="5" cols="33"></textarea>
                 </div>
                 <button type="submit" value="Submit">Envoyer</button>
-                <button type="submit" value="Delete">Supprimer</button>
+                <button type="submit" value="Delete">Modifier</button>
             </form>	
         </div>
     )

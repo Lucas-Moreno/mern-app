@@ -1,4 +1,8 @@
 .App__title{
     text-align:center;
-    margin:2rem 0 2rem 0;
+    margin:2rem 0 8rem 0;
+}
+.containerForm{
+    display:flex;
+    justify-content: space-evenly;
 }
