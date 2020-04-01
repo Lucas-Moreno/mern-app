@@ -3,14 +3,20 @@ const express = require('express');
 const dotenv = require('dotenv').config();
 const bodyParser = require('body-parser');
 var cors = require('cors');
-const port = 5000;
+const port = process.env.PORT || 5000;
 
-var postMessageRoutes = require('./controllers/postMessageController');
+
 
 var app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
+
+
+
+// ROUTES
+
+var postMessageRoutes = require('./controllers/postMessageController');
 app.use('/postMessages', postMessageRoutes);
 
 app.get('/', function(req, res) {

@@ -1,19 +1,26 @@
 import React from 'react';
-import '../css/style.css';
 import './App.css';
-import Form from '../Components/form/Form';
-import Renderform from '../Components/renderform/RenderForm';
+import { Provider } from "react-redux";
+import PostMessages from "../components/PostMessages";
+import { store } from "../actions/store";
+import { Container, AppBar, Typography } from "@material-ui/core";
+import ButterToast,{ POS_RIGHT,POS_TOP } from "butter-toast";
 
-const App = () => {
+function App() {
   return (
-    <div className="App">
-      <h1 className="App__title">Nouvelle Application</h1>
-      <div className="containerForm">
-        <Form />
-        <Renderform />
-      </div>
-
-    </div>
+    <Provider store={store}>
+      <Container maxWidth="lg">
+        <AppBar position="static" color="inherit">
+          <Typography
+            variant="h2"
+            align="center">
+            Post Box
+          </Typography>
+        </AppBar>
+        <PostMessages />
+        <ButterToast position={{vertical:POS_TOP,horizontal:POS_RIGHT}}/>
+      </Container>
+    </Provider>
   );
 }
 
