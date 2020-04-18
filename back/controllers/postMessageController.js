@@ -5,6 +5,7 @@ var ObjectID = require('mongoose').Types.ObjectId;
 
 var {PostMessage} = require('../models/postMessage');
 
+
 router.get('/', (req, res) => {
     PostMessage.find((err, docs) =>{
         if(!err) res.send(docs)
