@@ -2,3 +2,7 @@
     text-align:center;
     margin:2rem 0 2rem 0;
 }
+.App__post{
+    display:flex;
+    margin:5vw 5vw;
+}

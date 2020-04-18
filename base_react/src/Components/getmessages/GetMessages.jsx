@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios';
+import './getmessages.css';
 
 const Posts = () => {
     const [posts, setPosts] = useState([])
@@ -13,14 +14,14 @@ const Posts = () => {
             .catch(err => {
                 console.log(err)
             })
-    })
+    },[])
     return (
         <div>
-            <ul>
+            <ul className="cards">
                 {posts.map(post => 
-                    <div key={post._id}>
-                        <p>{post.title}</p>
-                        <p>{post.message}</p>
+                    <div className="card" key={post._id}>
+                        <p className="card__title">{post.title}</p>
+                        <p className="card__message">{post.message}</p>  
                     </div>
                 )}
             </ul>
