@@ -9,6 +9,9 @@
     margin-bottom: 50px;
     width: 150px;
   }
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
   .card__title{
     margin-bottom: 10px;
     background: cornflowerblue;
@@ -26,6 +29,9 @@
       height:100px;
       overflow:scroll;
   }
-  .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  .card__buttons {
+    display: flex;
+    justify-content: space-around;
+    padding:10px;
   }
+

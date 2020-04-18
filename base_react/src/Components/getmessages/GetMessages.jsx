@@ -21,7 +21,11 @@ const Posts = () => {
                 {posts.map(post => 
                     <div className="card" key={post._id}>
                         <p className="card__title">{post.title}</p>
-                        <p className="card__message">{post.message}</p>  
+                        <p className="card__message">{post.message}</p>
+                        <div className="card__buttons">
+                            <button type="submit">Modifier</button>
+                            <button type="submit">Supprimer</button> 
+                        </div>  
                     </div>
                 )}
             </ul>
