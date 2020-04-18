@@ -2,8 +2,9 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios';
 
 const Posts = () => {
-    const [posts, setPosts] = useState([])
-
+		const [posts, setPosts] = useState([])
+		
+		/// quand tu fais un useEffect pour récupperer des data depuis une api mets un tableau vide.
     useEffect(() =>{
         axios.get('http://localhost:5000/postmessages')
             .then(res => {
@@ -13,7 +14,7 @@ const Posts = () => {
             .catch(err => {
                 console.log(err)
             })
-    })
+    },[])
     return (
         <div>
             <ul>
