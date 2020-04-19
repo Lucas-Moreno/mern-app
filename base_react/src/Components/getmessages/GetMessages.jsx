@@ -9,7 +9,7 @@ const Posts = () => {
 
 
     useEffect(() =>{
-        axios.get('http://localhost:5000/postmessages')
+        axios.get(url)
             .then(res => {
                 setPosts(res.data)
             })

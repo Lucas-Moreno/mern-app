@@ -4,11 +4,13 @@ import axios from 'axios'
 import './form.css';
 
 const Form = () => {
+    const url = 'http://localhost:5000/postmessages';
+
     const [ message , setMessage ] = useState('')
     const [ title , setTitle ] = useState('')
     
     const sendForm = () => {
-        axios.post("http://localhost:5000/postmessages", {
+        axios.post(url, {
             title,
             message,
         })
