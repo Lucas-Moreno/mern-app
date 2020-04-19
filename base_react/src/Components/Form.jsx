@@ -1,15 +1,25 @@
 import React from 'react'
+import { useState } from 'react'
+import axios from 'axios'
 
 const Form = () => {
+    const [ message , setMessage ] = useState('')
+    const [ title , setTitle ] = useState('')
+    const sendForm = () => {
+        axios.post("http://localhost:5000/postmessages", {
+            title,
+            message,
+        })
+    }
     return (
         <div>
             <div>
-               <input type="text" name="title"></input> 
+               <input  onChange={e => setTitle(e.target.value)} type="text" name="title"></input> 
             </div>
             <div>
-                <input type="text" name="message"></input>
+                <input type="text"  onChange={e => setMessage(e.target.value)} name="message"></input>
             </div> 
-            <button type="submit">Envoyer</button>
+            <button onClick={() => { sendForm() }} type="submit">Envoyer</button>
         </div>
     )
 }
