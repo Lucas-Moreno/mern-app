@@ -9,6 +9,15 @@ const Card = (post) => {
   const [isShow, setIsShow] = useState(false);
   const content = post.post;
 
+    const [ message , setMessage ] = useState('')
+    const [ title , setTitle ] = useState('')
+    
+    const updateCard = (id) => {
+        axios.put(url+'/'+id, {
+            title: title,
+            message: message,
+        })
+    }
 
   const deleteCard = (id) => {
     axios
@@ -21,7 +30,7 @@ const Card = (post) => {
       });
   };
 
-  const updateCard = () => {
+  const toggleCard = () => {
     setIsShow(!isShow);
   };
 
@@ -29,12 +38,12 @@ const Card = (post) => {
   return (
     <div className="card" key={content._id}>
       {isShow ? (
-        <input className="card__title" type="text" placeholder={content.title}></input>
+        <input className="card__title" type="text" placeholder={content.title} onChange={e => setTitle(e.target.value)}></input>
       ) : (
         <p className="card__title">{content.title}</p>
       )}
       {isShow ? (
-        <textarea className="textarea__message" type="text" placeholder={content.message}></textarea>
+        <textarea className="textarea__message" type="text" placeholder={content.message} onChange={e => setMessage(e.target.value)}></textarea>
       ) : (
         <p className="card__message">{content.message}</p>
       )}
@@ -42,8 +51,8 @@ const Card = (post) => {
         {isShow ? (
         <button
             type="submit"
-            onClick={() => {
-              updateCard(content._id);
+            onClick={() => { 
+                updateCard(content._id)
             }}
           >
             Envoyer
@@ -52,7 +61,7 @@ const Card = (post) => {
           <button
           type="submit"
           onClick={() => {
-            updateCard(content._id);
+            toggleCard(content._id);
           }}
         >
           Modifier
