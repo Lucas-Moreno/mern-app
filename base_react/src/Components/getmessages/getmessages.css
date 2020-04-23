@@ -29,6 +29,12 @@
       height:100px;
       overflow:scroll;
   }
+  .textarea__message{
+    padding:5px;
+    word-wrap: break-word;
+    height:100px;
+    overflow:scroll;
+  }
   .card__buttons {
     display: flex;
     justify-content: space-around;

@@ -5,6 +5,7 @@ import "./getmessages.css";
 const Card = (post) => {
     
   const url = "http://localhost:5000/postmessages";
+
   const [isShow, setIsShow] = useState(false);
   const content = post.post;
 
@@ -28,17 +29,27 @@ const Card = (post) => {
   return (
     <div className="card" key={content._id}>
       {isShow ? (
-        <input type="text" placeholder={content.title}></input>
+        <input className="card__title" type="text" placeholder={content.title}></input>
       ) : (
         <p className="card__title">{content.title}</p>
       )}
       {isShow ? (
-        <input type="text" placeholder={content.message}></input>
+        <textarea className="textarea__message" type="text" placeholder={content.message}></textarea>
       ) : (
         <p className="card__message">{content.message}</p>
       )}
       <div className="card__buttons">
+        {isShow ? (
         <button
+            type="submit"
+            onClick={() => {
+              updateCard(content._id);
+            }}
+          >
+            Envoyer
+        </button>
+        ) : (
+          <button
           type="submit"
           onClick={() => {
             updateCard(content._id);
@@ -46,6 +57,7 @@ const Card = (post) => {
         >
           Modifier
         </button>
+        )}
         <button
           type="submit"
           onClick={() => {
