@@ -2,11 +2,16 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./getmessages.css";
 
-const Card = (post, url) => {
+const Card = (post) => {
+    
+  const url = "http://localhost:5000/postmessages";
+  const [isShow, setIsShow] = useState(false);
   const content = post.post;
+
+
   const deleteCard = (id) => {
     axios
-      .delete(url + "/" + id)
+      .delete(url+ '/' +id)
       .then((res) => {
         console.log(res.data);
       })
@@ -19,7 +24,7 @@ const Card = (post, url) => {
     setIsShow(!isShow);
   };
 
-  const [isShow, setIsShow] = useState(false);
+ 
   return (
     <div className="card" key={content._id}>
       {isShow ? (
@@ -58,7 +63,6 @@ const Posts = () => {
   const [posts, setPosts] = useState([]);
 
   const url = "http://localhost:5000/postmessages";
-
   useEffect(() => {
     axios
       .get(url)
