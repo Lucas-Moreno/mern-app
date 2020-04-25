@@ -16,8 +16,11 @@ app.use(cors());
 
 // ROUTES
 
+
 var postMessageRoutes = require('./controllers/postMessageController');
+var userRoutes = require('./controllers/userController');
 app.use('/postMessages', postMessageRoutes);
+app.use('/users', userRoutes);
 
 
 app.get('/', function(req, res) {

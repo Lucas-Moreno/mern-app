@@ -23,11 +23,17 @@
     letter-spacing: 1px;
     height: 15px;
   }
+  .card__title::placeholder{
+    color:white;
+  }
   .card__message{
       padding:10px;
       word-wrap: break-word;
       height:100px;
       overflow:scroll;
+  }
+  .card__message::placeholder{
+    color:black;
   }
   .textarea__message{
     padding:5px;
