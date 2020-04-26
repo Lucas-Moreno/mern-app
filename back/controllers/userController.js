@@ -19,11 +19,20 @@ router.post('/', (req, res) =>{
         password : req.body.password
     })
 
+    if(!newRecord.pseudo || !newRecord.mail || !newRecord.password){
+        return res.status(400).json({ 'error': 'missing parameters' });
+    }
+
+    
+
     newRecord.save((err, docs) => {
         if(!err) res.send(docs)
         else console.log('error create new record :' + JSON.stringify(err, undefined, 2))
+        
     })
+    
 })
+
 
 
 module.exports = router
