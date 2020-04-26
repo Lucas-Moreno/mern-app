@@ -19,6 +19,10 @@ router.post('/', (req, res) =>{
         message: req.body.message
     })
 
+    if(!newRecord.title || !newRecord.message){
+        return res.status(400).json({ 'error': 'missing parameters' });
+    }
+
     newRecord.save((err, docs) => {
         if(!err) res.send(docs)
         else console.log('error create new record :' + JSON.stringify(err, undefined, 2))
