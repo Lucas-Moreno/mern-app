@@ -19,6 +19,7 @@ app.use(cors());
 var postMessageRoutes = require('./controllers/postMessageController');
 app.use('/postMessages', postMessageRoutes);
 
+
 app.get('/', function(req, res) {
     res.send('Hello world');
   });
