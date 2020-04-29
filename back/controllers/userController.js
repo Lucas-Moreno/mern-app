@@ -1,11 +1,16 @@
 const express = require('express');
 var router = express.Router();
+var bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
+
 
 // Constants
 const EMAIL_REGEX     = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PASSWORD_REGEX  = /^(?=.*\d).{4,8}$/;
 
 var {User} = require('../models/User');
+
+
 
 
 router.get('/', (req, res) => {
@@ -25,6 +30,7 @@ router.post('/', (req, res) =>{
     if(!newRecord.pseudo || !newRecord.mail || !newRecord.password){
         return res.status(400).json({ 'error': 'missing parameters' });
     }
+    
 
     if (newRecord.pseudo.length >= 13 || newRecord.pseudo.length <= 4) {
         return res.status(400).json({ 'error': 'wrong username (must be length 5 - 12)' });
@@ -37,6 +43,20 @@ router.post('/', (req, res) =>{
     if (!PASSWORD_REGEX.test(newRecord.password)) {
         return res.status(400).json({ 'error': 'password invalid (must length 4 - 8 and include 1 number at least)' });
     }
+    User.findOne({
+        attributes: ['mail'],
+        where: { mail : newRecord.mail}
+    })
+    .then(function(mail){
+        if(!mail){
+
+        }else{
+            return res.status(400).json({'error' : 'user already exist'})
+        }
+    })
+    .catch(function(err){
+        return res.status(500).json({ 'error' : 'unable to verify user'})
+    });
 
     newRecord.save((err, docs) => {
         if(!err) res.send(docs)
