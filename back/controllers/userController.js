@@ -30,7 +30,6 @@ router.post('/', (req, res) =>{
     if(!newRecord.pseudo || !newRecord.mail || !newRecord.password){
         return res.status(400).json({ 'error': 'missing parameters' });
     }
-    
 
     if (newRecord.pseudo.length >= 13 || newRecord.pseudo.length <= 4) {
         return res.status(400).json({ 'error': 'wrong username (must be length 5 - 12)' });
@@ -43,13 +42,17 @@ router.post('/', (req, res) =>{
     if (!PASSWORD_REGEX.test(newRecord.password)) {
         return res.status(400).json({ 'error': 'password invalid (must length 4 - 8 and include 1 number at least)' });
     }
-    User.findOne({
-        attributes: ['mail'],
-        where: { mail : newRecord.mail}
-    })
-    .then(function(mail){
-        if(!mail){
 
+
+    User.findOne({mail : newRecord.mail})
+    .then((mail) =>{
+        if(!mail){
+            newRecord.save((err, docs) => {
+                if(!err) {
+                    return res.send(docs)
+                }
+                return res.status(400).json('error create new record :' + JSON.stringify(err, undefined, 2))
+            })
         }else{
             return res.status(400).json({'error' : 'user already exist'})
         }
@@ -57,15 +60,7 @@ router.post('/', (req, res) =>{
     .catch(function(err){
         return res.status(500).json({ 'error' : 'unable to verify user'})
     });
-
-    newRecord.save((err, docs) => {
-        if(!err) res.send(docs)
-        else console.log('error create new record :' + JSON.stringify(err, undefined, 2))
-        
-    })
-    
 })
-
 
 
 module.exports = router
