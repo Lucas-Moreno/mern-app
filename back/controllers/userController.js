@@ -21,38 +21,49 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) =>{
-    var newRecord = new User({
-        pseudo : req.body.pseudo,
-        mail : req.body.mail,
-        password : req.body.password
-    })
 
-    if(!newRecord.pseudo || !newRecord.mail || !newRecord.password){
+    var pseudo = req.body.pseudo;
+    var mail = req.body.mail;
+    var password = req.body.password;
+
+    if(!pseudo || !mail || !password){
         return res.status(400).json({ 'error': 'missing parameters' });
     }
 
-    if (newRecord.pseudo.length >= 13 || newRecord.pseudo.length <= 4) {
+    if (pseudo.length >= 13 || pseudo.length <= 4) {
         return res.status(400).json({ 'error': 'wrong username (must be length 5 - 12)' });
     }
   
-    if (!EMAIL_REGEX.test(newRecord.mail)) {
+    if (!EMAIL_REGEX.test(mail)) {
         return res.status(400).json({ 'error': 'email is not valid' });
     }
   
-    if (!PASSWORD_REGEX.test(newRecord.password)) {
+    if (!PASSWORD_REGEX.test(password)) {
         return res.status(400).json({ 'error': 'password invalid (must length 4 - 8 and include 1 number at least)' });
     }
 
 
-    User.findOne({mail : newRecord.mail})
+    User.findOne({mail : mail})
     .then((mail) =>{
         if(!mail){
-            newRecord.save((err, docs) => {
-                if(!err) {
-                    return res.send(docs)
-                }
-                return res.status(400).json('error create new record :' + JSON.stringify(err, undefined, 2))
-            })
+            bcrypt.hash(password, 3, function(err, hash) {
+                var newRecord = User.create({
+                    pseudo : req.body.pseudo,
+                    mail : req.body.mail,
+                    password : hash
+                })
+                .then((newRecord) =>{
+                    newRecord.save((err, docs) => {
+                        if(!err) {
+                            return res.status(201).json({'password' : password});
+                        }
+                            return res.status(400).json('error create new record :' + JSON.stringify(err, undefined, 2))
+                    })
+                })   
+                .catch(function(err){
+                    return res.status(500).json({ 'error' : 'pas de mot de passe'})
+                });
+            });
         }else{
             return res.status(400).json({'error' : 'user already exist'})
         }
