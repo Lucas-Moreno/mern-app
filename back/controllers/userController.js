@@ -1,7 +1,7 @@
 const express = require('express');
 var router = express.Router();
 var bcrypt = require('bcrypt');
-var jwt = require('jsonwebtoken');
+var jwtUtils = require('../utils/jwt.utils');
 
 
 // Constants
@@ -90,7 +90,7 @@ router.post('/login', (req, res) =>{
                     return res.status(200).json({
                         'mail' : mail,
                         'password' : password,
-                        'token' : 'THE TOKEN'
+                        'token' : jwtUtils.generateTokenForUser(userFound)
                     })
                 }
             })
