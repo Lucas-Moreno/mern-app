@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
     })
 });
 
-router.post('/', (req, res) =>{
+router.post('/register', (req, res) =>{
 
     var pseudo = req.body.pseudo;
     var mail = req.body.mail;
@@ -55,7 +55,7 @@ router.post('/', (req, res) =>{
                 .then((newRecord) =>{
                     newRecord.save((err, docs) => {
                         if(!err) {
-                            return res.status(201).json({'password' : password});
+                            return res.status(201).json({'ok' : 'create'});
                         }
                             return res.status(400).json('error create new record :' + JSON.stringify(err, undefined, 2))
                     })
@@ -72,6 +72,37 @@ router.post('/', (req, res) =>{
         return res.status(500).json({ 'error' : 'unable to verify user'})
     });
 })
+
+router.post('/login', (req, res) =>{
+    
+    var id = req.body._id;
+    var mail = req.body.mail;
+    var password = req.body.password;
+
+    if(!password || !mail ){
+        return res.status(400).json({ 'error': 'missing parameters' });
+    }
+    User.findOne({mail : mail})
+    .then((userFound) =>{
+        if(userFound){
+            bcrypt.compare(password, userFound.password, function(errBycrypt, resBycrypt){
+                if(resBycrypt){
+                    return res.status(200).json({
+                        'mail' : mail,
+                        'password' : password,
+                        'token' : 'THE TOKEN'
+                    })
+                }
+            })
+        }else{
+            return res.status(500).json({ 'error' : 'invalid password'})
+        }
+    })
+    .catch(() =>{
+        return res.status(500).json({ 'error' : 'unable to verify user'})
+    })
+
+});
 
 
 module.exports = router
