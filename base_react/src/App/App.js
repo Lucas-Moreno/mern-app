@@ -1,8 +1,8 @@
-import React from 'react';
-import '../css/style.css';
-import './App.css';
-import Form from '../Components/form/Form';
-import Posts from '../Components/getmessages/GetMessages';
+import React from "react";
+import "../css/style.css";
+import "./App.css";
+import Form from "../Components/form/Form";
+import Posts from "../Components/getmessages/GetMessages";
 
 const App = () => {
   return (
@@ -14,6 +14,6 @@ const App = () => {
       </div>
     </div>
   );
-}
+};
 
 export default App;

@@ -2,30 +2,29 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./getmessages.css";
 
-const Card = (post) => {
-    
+const Card = post => {
   const url = "http://localhost:5000/postmessages";
 
   const [isShow, setIsShow] = useState(false);
   const content = post.post;
 
-    const [ message , setMessage ] = useState('')
-    const [ title , setTitle ] = useState('')
-    
-    const updateCard = (id) => {
-        axios.put(url+'/'+id, {
-            title: title,
-            message: message,
-        })
-    }
+  const [message, setMessage] = useState("");
+  const [title, setTitle] = useState("");
 
-  const deleteCard = (id) => {
+  const updateCard = id => {
+    axios.put(url + "/" + id, {
+      title: title,
+      message: message
+    });
+  };
+
+  const deleteCard = id => {
     axios
-      .delete(url+ '/' +id)
-      .then((res) => {
+      .delete(url + "/" + id)
+      .then(res => {
         console.log(res.data);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   };
@@ -34,38 +33,47 @@ const Card = (post) => {
     setIsShow(!isShow);
   };
 
- 
   return (
     <div className="card" key={content._id}>
       {isShow ? (
-        <input className="card__title" type="text" placeholder={content.title} onChange={e => setTitle(e.target.value)}></input>
+        <input
+          className="card__title"
+          type="text"
+          placeholder={content.title}
+          onChange={e => setTitle(e.target.value)}
+        ></input>
       ) : (
         <p className="card__title">{content.title}</p>
       )}
       {isShow ? (
-        <textarea className="textarea__message" type="text" placeholder={content.message} onChange={e => setMessage(e.target.value)}></textarea>
+        <textarea
+          className="textarea__message"
+          type="text"
+          placeholder={content.message}
+          onChange={e => setMessage(e.target.value)}
+        ></textarea>
       ) : (
         <p className="card__message">{content.message}</p>
       )}
       <div className="card__buttons">
         {isShow ? (
-        <button
+          <button
             type="submit"
-            onClick={() => { 
-                updateCard(content._id)
+            onClick={() => {
+              updateCard(content._id);
             }}
           >
             Envoyer
-        </button>
+          </button>
         ) : (
           <button
-          type="submit"
-          onClick={() => {
-            toggleCard(content._id);
-          }}
-        >
-          Modifier
-        </button>
+            type="submit"
+            onClick={() => {
+              toggleCard(content._id);
+            }}
+          >
+            Modifier
+          </button>
         )}
         <button
           type="submit"
@@ -87,10 +95,10 @@ const Posts = () => {
   useEffect(() => {
     axios
       .get(url)
-      .then((res) => {
+      .then(res => {
         setPosts(res.data);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   }, []);
