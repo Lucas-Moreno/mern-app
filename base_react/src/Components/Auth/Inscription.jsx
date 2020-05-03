@@ -4,9 +4,9 @@ const Inscription = () => {
   return (
     <div>
       <h1>Inscription :</h1>
-      <input>Pseudo :</input>
-      <input>E-mail :</input>
-      <input>Mot de passe :</input>
+      Pseudo :<input />
+      E-mail :<input />
+      Mot de passe :<input />
       <button>S'inscrire</button>
     </div>
   );
