@@ -5,7 +5,7 @@ var jwtUtils = require("../utils/jwt.utils");
 
 // Constants
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const PASSWORD_REGEX = /^(?=.*\d).{4,8}$/;
+const PASSWORD_REGEX = /^(?=.*\d).{4,20}$/;
 
 var { User } = require("../models/User");
 
@@ -36,12 +36,10 @@ router.post("/register", (req, res) => {
   }
 
   if (!PASSWORD_REGEX.test(password)) {
-    return res
-      .status(400)
-      .json({
-        error:
-          "password invalid (must length 4 - 8 and include 1 number at least)"
-      });
+    return res.status(400).json({
+      error:
+        "password invalid (must length 4 - 8 and include 1 number at least)"
+    });
   }
 
   User.findOne({ mail: mail })
@@ -80,7 +78,6 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
-  var id = req.body._id;
   var mail = req.body.mail;
   var password = req.body.password;
 
@@ -109,6 +106,28 @@ router.post("/login", (req, res) => {
     .catch(() => {
       return res.status(500).json({ error: "unable to verify user" });
     });
+});
+
+router.get("/me", (req, res) => {
+  var headerAuth = req.headers["authorization"];
+  var userData = jwtUtils.getUserId(headerAuth);
+
+  if (userData < 0) {
+    return res.status(400).json({ error: "wrong token" });
+  }
+
+  User.findOne((err, userData) => {
+    mail = userData.mail;
+    pseudo = userData.pseudo;
+    if (!err) {
+      return res.status(200).json({
+        pseudo,
+        mail
+      });
+    } else {
+      res.status(404).json({ error: "user not found" });
+    }
+  });
 });
 
 module.exports = router;

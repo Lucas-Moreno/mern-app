@@ -14,5 +14,21 @@ module.exports = {
         expiresIn: "1h"
       }
     );
+  },
+  parseAuthorization: function(authorization) {
+    return authorization != null ? authorization.replace("Bearer ", "") : null;
+  },
+  getUserId: function(authorization) {
+    userData = -1;
+    var token = module.exports.parseAuthorization(authorization);
+    if (token != null) {
+      try {
+        var jwtToken = jwt.verify(token, JWT_SIGN_SECRET);
+        if (jwtToken != null) {
+          userData = jwtToken.userData;
+        }
+      } catch (err) {}
+    }
+    return userData;
   }
 };
