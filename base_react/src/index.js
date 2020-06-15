@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import ReactDOM from "react-dom";
 import App from "../src/App/App";
 import Auth from "../src/App/Auth";
@@ -7,6 +7,7 @@ import * as serviceWorker from "../src/serviceWorker";
 import "./css/style.css";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+
 
 const Root = () => (
   <BrowserRouter>

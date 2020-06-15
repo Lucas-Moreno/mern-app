@@ -18,7 +18,7 @@ app.use("/postMessages", postMessageRoutes);
 app.use("/users", userRoutes);
 
 app.get("/", function(req, res) {
-  res.send("Hello world");
+  res.send("Mern-App");
 });
 
 app.listen(port, () => console.log(`Back app listening on port ${port}!`));

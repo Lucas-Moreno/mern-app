@@ -18,9 +18,9 @@ const Auth = () => {
           Se connecter
         </p>
       ) : (
-        <p onClick={toggleButton} className="swap_auth">
-          S'inscrire
-        </p>
+          <p onClick={toggleButton} className="swap_auth">
+            S'inscrire
+          </p>
       )}
     </div>
   );

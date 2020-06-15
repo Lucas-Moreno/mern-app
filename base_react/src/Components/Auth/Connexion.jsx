@@ -9,14 +9,17 @@ const Connexion = () => {
   const [password, setPassword] = useState("");
   const [redirection, setRedirection] = useState(false);
 
+
   const connectUser = () => {
     axios
       .post(url, {
         mail,
         password
       })
-      .then(() => setRedirection(true));
+      .then(res => localStorage.setItem("token", res.data.token), setRedirection(true));
   };
+
+
 
   return (
     <div>
@@ -31,8 +34,9 @@ const Connexion = () => {
       />
       {redirection === true ? <Redirect to="/app" /> : null}
       <button
-        onClick={() => {
+        onClick={ () => {
           connectUser();
+          
         }}
         type="submit"
       >
