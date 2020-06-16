@@ -29,7 +29,7 @@ const Inscription = () => {
       Mot de passe :
       <input
         onChange={e => setPassword(e.target.value)}
-        type="text"
+        type="password"
         name="password"
       />
       <button

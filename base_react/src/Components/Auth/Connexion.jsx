@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 const Connexion = () => {
@@ -7,8 +7,12 @@ const Connexion = () => {
 
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
-  const [redirection, setRedirection] = useState(false);
 
+  const history = useHistory();
+
+  function handleClick() {
+    history.push('/app');
+  }
 
   const connectUser = () => {
     axios
@@ -16,10 +20,12 @@ const Connexion = () => {
         mail,
         password
       })
-      .then(res => localStorage.setItem("token", res.data.token), setRedirection(true));
+      .then(res => {
+        localStorage.setItem("token", res.data.token);
+        handleClick();
+      });
   };
-
-
+  
 
   return (
     <div>
@@ -29,14 +35,12 @@ const Connexion = () => {
       Mot de passe :
       <input
         onChange={e => setPassword(e.target.value)}
-        type="text"
+        type="password"
         name="password"
       />
-      {redirection === true ? <Redirect to="/app" /> : null}
       <button
         onClick={ () => {
           connectUser();
-          
         }}
         type="submit"
       >

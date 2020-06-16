@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import App from "../src/App/App";
 import Auth from "../src/App/Auth";
 import NotFound from "../src/Components/Notfound/NotFound";
+import Authenticated from "../src/Components/Authenticated/Authenticated";
 import * as serviceWorker from "../src/serviceWorker";
 import "./css/style.css";
 
@@ -13,7 +14,9 @@ const Root = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={Auth}></Route>
-      <Route exact path="/app" component={App}></Route>
+      <Authenticated>
+        <Route exact path="/app" component={App}></Route>
+      </Authenticated>
       <Route component={NotFound}></Route>
     </Switch>
   </BrowserRouter>
