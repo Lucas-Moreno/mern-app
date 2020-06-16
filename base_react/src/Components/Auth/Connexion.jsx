@@ -10,7 +10,7 @@ const Connexion = () => {
 
   const history = useHistory();
 
-  function handleClick() {
+  function pushToApp() {
     history.push('/app');
   }
 
@@ -22,7 +22,7 @@ const Connexion = () => {
       })
       .then(res => {
         localStorage.setItem("token", res.data.token);
-        handleClick();
+        pushToApp();
       });
   };
   

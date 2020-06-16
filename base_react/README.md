@@ -1,8 +1,7 @@
 Tâches du moment non résolus :
 
-- ne pas permettre à l'utilisateur de changer le lien
 - Envoyer des messages à l'utilisateur pour connexion/inscription comme les res.status dans le back
-- Utiliser les tokens du back
+- Utiliser les tokens du back dans l'application
 
 Futur tâches :
 

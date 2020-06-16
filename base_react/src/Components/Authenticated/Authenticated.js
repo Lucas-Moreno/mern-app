@@ -12,14 +12,14 @@ const Authenticated = () => {
 
   let history = useHistory();
 
-  function handleClick() {
+  function pushToConnection() {
     history.push('/');
   }
 
   useEffect(() => {
     const jwt = getJwt();
     if(!jwt) {
-      handleClick();
+      pushToConnection();
     }
     axios
       .get(url, {headers: {Authorization: `Bearer ${jwt}`}})
@@ -28,7 +28,7 @@ const Authenticated = () => {
       })
       .catch(err => {
         localStorage.removeItem('token');
-        handleClick();
+        pushToConnection();
       });
   });
   if(user === undefined) {
