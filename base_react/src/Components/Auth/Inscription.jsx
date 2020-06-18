@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import './connexion.css';
 
 const Inscription = () => {
   const url = "http://localhost:5000/users/register";
@@ -16,23 +17,25 @@ const Inscription = () => {
     });
   };
   return (
-    <div>
-      <h1>Inscription :</h1>
-      Pseudo :
+    <div className="connexion">
+      <h1 className="title_inscription">Inscription :</h1>
       <input
+        className="input_inscription"
         onChange={e => setPseudo(e.target.value)}
         type="text"
         name="pseudo"
+        placeholder="Pseudo"
       />
-      E-mail :
-      <input onChange={e => setMail(e.target.value)} type="text" name="mail" />
-      Mot de passe :
+      <input className="input_inscription" onChange={e => setMail(e.target.value)} type="text" name="mail" placeholder="E-mail"/>
       <input
+        placeholder="Mot de passe"
+        className="input_inscription"
         onChange={e => setPassword(e.target.value)}
         type="password"
         name="password"
       />
       <button
+        className="button_submit"
         onClick={() => {
           sendUser();
         }}
@@ -40,6 +43,7 @@ const Inscription = () => {
       >
         S'inscrire
       </button>
+      <p class="swap__auth">Vous avez déjà un compte ?</p> 
     </div>
   );
 };

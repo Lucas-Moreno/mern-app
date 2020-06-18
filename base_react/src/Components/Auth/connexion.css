@@ -1,0 +1,87 @@
+.connexion{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  height: 55vh;
+  position: relative;
+}
+.title{
+  font-size: 54px;
+  line-height: 28px;
+  background: -webkit-linear-gradient(#007CF0, #00E6BF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  margin-top: 4rem;
+  margin-bottom: 6rem;
+}
+.title_inscription{
+  font-size: 54px;
+  line-height: 28px;
+  background: -webkit-linear-gradient(#007CF0, #00E6BF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+}
+.input{
+  border: none;
+  border-bottom: 3px solid #00E6BF;
+  width: 28vw;
+  padding-bottom:1rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 6rem;
+}
+.input_inscription{
+  border: none;
+  border-bottom: 3px solid #00E6BF;
+  width: 28vw;
+  padding-bottom:1rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 5rem;
+}
+
+.input_inscription::placeholder{
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 12px;
+  color: #000000;
+}
+.input::placeholder{
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 12px;
+  color: #000000;
+}
+input:focus {
+  outline:  none;
+}
+.input_inscription:focus {
+  outline:  none;
+}
+.button_submit{
+  background: linear-gradient(121.86deg, #007CF0 1.69%, #00E6BF 82.79%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: none;
+  color: white;
+  font-size: 18px;
+  line-height: 14px;
+  padding: 1rem 3rem;
+  position: absolute;
+  bottom: 7%;
+  cursor:pointer;
+}
+.swap__auth{
+  position: absolute;
+  bottom: 1%;
+}

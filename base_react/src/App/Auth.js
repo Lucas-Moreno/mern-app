@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Connexion from "../Components/Auth/Connexion";
 import Inscription from "../Components/Auth/Inscription";
+import Logo from "../assets/logo.png";
 import "./auth.css";
 
 const Auth = () => {
@@ -11,7 +12,9 @@ const Auth = () => {
   };
 
   return (
-    <div>
+    <div className="auth">
+      <div className="container">
+      <img src={Logo} className="logo" />
       {isShow ? <Inscription /> : <Connexion />}
       {isShow ? (
         <p onClick={toggleButton} className="swap_auth">
@@ -19,9 +22,10 @@ const Auth = () => {
         </p>
       ) : (
           <p onClick={toggleButton} className="swap_auth">
-            S'inscrire
+            Inscrivez-vous
           </p>
       )}
+      </div>
     </div>
   );
 };

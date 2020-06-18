@@ -5,8 +5,6 @@ import Form from "../Components/form/Form";
 import Posts from "../Components/getmessages/GetMessages";
 
 const App = () => {
-
-
   return (
     <div className="App">
       <h1 className="App__title">Nouvelle Application</h1>
