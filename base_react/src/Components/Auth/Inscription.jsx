@@ -18,7 +18,7 @@ const Inscription = () => {
   };
   return (
     <div className="connexion">
-      <h1 className="title_inscription">Inscription :</h1>
+      <h1 className="title_inscription">Inscrivez-vous</h1>
       <input
         className="input_inscription"
         onChange={e => setPseudo(e.target.value)}
